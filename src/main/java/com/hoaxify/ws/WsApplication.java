@@ -40,12 +40,9 @@ public class WsApplication {
 	public ProblemDetails handleBusinessException(MethodArgumentNotValidException methodArgumentNotValidException) {
 		ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails();
 		validationProblemDetails.setValidationErrors(new HashMap<>());
-		int index = 0;
 		for (FieldError fieldError : methodArgumentNotValidException.getBindingResult().getFieldErrors()) {
-			validationProblemDetails.getValidationErrors().put((++index) + ". " + fieldError.getField(),
-					fieldError.getDefaultMessage());
+			validationProblemDetails.getValidationErrors().put(fieldError.getField(), fieldError.getDefaultMessage());
 		}
-		validationProblemDetails.getValidationErrors().put("temam", "oldi");
 		return validationProblemDetails;
 
 	}

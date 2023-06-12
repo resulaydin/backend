@@ -15,10 +15,15 @@ public class CreateUserRequest {
 
 	@NotNull
 	@NotBlank
+	@Size(min = 8, max = 255)
 	private String username;
 	@NotNull
 	@NotBlank
-	private String email;
+	@Size(min = 8, max = 255)
+	private String displayName;;
+//	@NotNull
+//	@NotBlank
+//	private String email;
 	@NotNull
 	@NotBlank
 	@Size(min = 8, max = 12)

@@ -27,7 +27,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public GenericResponse createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
 		userService.add(createUserRequest);
-		return new GenericResponse("başarılı");
+		return new GenericResponse("user created - basarili");
 
 	}
 }

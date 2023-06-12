@@ -9,9 +9,10 @@ import com.hoaxify.ws.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	// Spring Data JPA  kullanarak:
+//	boolean existsByUsername(String name); 
 	
-//	boolean existsByUsername(String name);
-	
+	// Query Annotation kullanarak:
 	@Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM User u WHERE u.username = :username")
 	boolean existsByUsername(@Param("username") String username);
 
