@@ -1,6 +1,6 @@
-package com.hoaxify.ws.service.abstracts;
+package com.hoaxify.ws.business.abstracts;
 
-import com.hoaxify.ws.service.requests.CreateUserRequest;
+import com.hoaxify.ws.business.requests.CreateUserRequest;
 
 public interface UserService {
 //	List<GetAllBrandsResponse> getAll();

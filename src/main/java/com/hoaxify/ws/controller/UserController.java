@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hoaxify.ws.service.concretes.UserManager;
-import com.hoaxify.ws.service.requests.CreateUserRequest;
+import com.hoaxify.ws.business.concretes.UserManager;
+import com.hoaxify.ws.business.requests.CreateUserRequest;
 import com.hoaxify.ws.shared.GenericResponse;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -24,7 +25,7 @@ public class UserController {
 
 	@PostMapping("/api/v1.0/users")
 	@ResponseStatus(HttpStatus.CREATED)
-	public GenericResponse createUser(@RequestBody CreateUserRequest createUserRequest) {
+	public GenericResponse createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
 		userService.add(createUserRequest);
 		return new GenericResponse("başarılı");
 

@@ -1,4 +1,4 @@
-package com.hoaxify.ws.service.requests;
+package com.hoaxify.ws.business.requests;
 
 
 import jakarta.validation.constraints.NotBlank;
