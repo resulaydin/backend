@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 
 import com.hoaxify.ws.business.abstracts.UserService;
 import com.hoaxify.ws.business.requests.CreateUserRequest;
+import com.hoaxify.ws.business.responses.CreateUserResponse;
 import com.hoaxify.ws.business.rules.UserBusinessRules;
 import com.hoaxify.ws.core.utilities.mappers.ModelMapperService;
-import com.hoaxify.ws.core.utilities.security.PasswordEncoderService;
 import com.hoaxify.ws.entities.User;
 import com.hoaxify.ws.repository.UserRepository;
 
@@ -26,6 +26,12 @@ public class UserManager implements UserService {
 		user.setPassword(businessRules.encodePassword(user.getPassword()));
 		System.out.println(user.getPassword());
 		userRepository.save(user);
+	}
+
+	@Override
+	public CreateUserResponse findByUsername(String username) {
+		return modelMapperService.forResponse().map(userRepository.findByUsername(username), CreateUserResponse.class);
+
 	}
 
 }

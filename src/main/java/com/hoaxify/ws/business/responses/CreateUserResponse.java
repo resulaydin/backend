@@ -1,4 +1,4 @@
-package com.hoaxify.ws.business.requests;
+package com.hoaxify.ws.business.responses;
 
 import com.hoaxify.ws.core.utilities.validators.UniqueUsername;
 
@@ -13,20 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateUserRequest {
-
+public class CreateUserResponse {
 	@NotNull(message = "{hoaxify.username.constraints.NOTNULL.message}")
 	@NotBlank
 	@UniqueUsername
 	@Size(min = 5, max = 255)
 	private String username;
-	@NotNull
-	@NotBlank
-	@Size(min = 5, max = 255)
-	private String displayName;;
-//	@NotNull
-//	@NotBlank
-//	private String email;
+	
 	@NotNull
 	@NotBlank
 	@Size(min = 4, max = 12)

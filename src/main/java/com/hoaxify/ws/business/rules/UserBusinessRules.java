@@ -7,8 +7,6 @@ import com.hoaxify.ws.core.utilities.security.PasswordEncoderService;
 import com.hoaxify.ws.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Service
 @AllArgsConstructor

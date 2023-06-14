@@ -1,4 +1,4 @@
-package com.hoaxify.ws.controller;
+package com.hoaxify.ws.controller.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

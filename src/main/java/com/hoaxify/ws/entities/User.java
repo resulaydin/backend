@@ -25,8 +25,8 @@ public class User {
 	private String username;
 	@Column(name = "displayName")
 	private String displayName;
-	@Column(name = "email")
-	private String email;
+//	@Column(name = "email")
+//	private String email;
 	@Column(name = "password")
 	private String password;
 }
