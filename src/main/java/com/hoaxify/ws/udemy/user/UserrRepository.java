@@ -1,14 +1,12 @@
-package com.hoaxify.ws.repository;
+package com.hoaxify.ws.udemy.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.hoaxify.ws.entities.User;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserrRepository extends JpaRepository<Userr, Long> {
 	// Spring Data JPA  kullanarak:
 //	boolean existsByUsername(String name); 
 	
@@ -17,5 +15,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	boolean existsByUsername(@Param("username") String username);
 	
 	@Query("select u from Userr u where u.username = :username")
-	User findByUsername(@Param("username") String name);
+	Userr findByUsername(@Param("username") String name);
 }

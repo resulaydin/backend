@@ -1,4 +1,4 @@
-package com.hoaxify.ws.entities;
+package com.hoaxify.ws.udemy.user;
 
 
 import jakarta.persistence.Column;
@@ -11,12 +11,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "users")
+@Table(name = "userrs")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+public class Userr {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

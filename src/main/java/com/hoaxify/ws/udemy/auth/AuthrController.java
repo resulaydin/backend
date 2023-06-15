@@ -1,4 +1,4 @@
-package com.hoaxify.ws.controller.auth;
+package com.hoaxify.ws.udemy.auth;
 
 import java.util.Base64;
 
@@ -13,29 +13,29 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hoaxify.ws.business.abstracts.UserService;
-import com.hoaxify.ws.business.responses.CreateUserResponse;
-import com.hoaxify.ws.core.utilities.error.ApiError;
+import com.hoaxify.ws.udemy.error.ApirError;
+import com.hoaxify.ws.udemy.user.Userr;
+import com.hoaxify.ws.udemy.user.UserrService;
 
 @RestController
-public class AuthController {
+public class AuthrController {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
-	UserService userService;
-	ApiError apiError;
+	UserrService userrService;
+	ApirError apirError;
 
-	final static Logger logger = LoggerFactory.getLogger(AuthController.class);
+	final static Logger logger = LoggerFactory.getLogger(AuthrController.class);
 
-	@PostMapping("/api/v1.0/auth")
+	@PostMapping("/api/v1.0/authr")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> handleAuthentation(
 			@RequestHeader(name = "Authorization", required = false) String authorization) {
 		if (authorization == null) {
-			apiError = new ApiError(401, "Unauthorized - ", "/ap/v1.0/auth -");
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
+			apirError = new ApirError(401, "Unauthorized - ", "/ap/v1.0/authr -");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apirError);
 		}
 
 		String authHeader = authorization.split("Basic ")[1];
@@ -45,13 +45,18 @@ public class AuthController {
 		String password = authHeader.split(":")[1];
 		System.out.println(username + "ve " + password);
 
-		CreateUserResponse user = userService.findByUsername(username);
-		
-		String hashedPassword = user.getPassword();
-		
+		Userr userr = userrService.findByUsername(username);
+
+		if (userr == null) {
+			apirError = new ApirError(401, "Unauthorized user", "/api/v1.0/authr");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apirError);
+		}
+
+		String hashedPassword = userr.getPassword();
+
 		if (!passwordEncoder.matches(password, hashedPassword)) {
-			apiError = new ApiError(401, "unAuthorizated", "/api/v1.0/auth");
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
+			apirError = new ApirError(401, "unAuthorizated", "/api/v1.0/authr");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apirError);
 		}
 
 		// Burada username db de varmı kontrolü yapılacaktır.
