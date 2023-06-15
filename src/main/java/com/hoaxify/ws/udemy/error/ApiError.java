@@ -1,4 +1,4 @@
-package com.hoaxify.ws.core.utilities.error;
+package com.hoaxify.ws.udemy.error;
 
 import java.util.Date;
 import java.util.HashMap;

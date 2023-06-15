@@ -11,8 +11,8 @@ import jakarta.validation.Payload;
 
 @Target({  FIELD })
 @Retention(RUNTIME)
-@Constraint(validatedBy = {UniquerUsernameValidator.class })
-public @interface UniquerUsername {
+@Constraint(validatedBy = {UniqueUsernameValidator.class })
+public @interface UniqueUsername {
 	
 	String message() default "{hoaxify.message.constraints.UNIQUE.message}";
 

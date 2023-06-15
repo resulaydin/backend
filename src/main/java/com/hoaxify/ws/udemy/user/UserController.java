@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hoaxify.ws.udemy.shared.GenericrResponse;
+import com.hoaxify.ws.udemy.shared.GenericResponse;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-public class UserrController {
+public class UserController {
 
-	private UserrService userrService;
+	private UserService userrService;
 
-	final static Logger log = LoggerFactory.getLogger(UserrController.class);
+	final static Logger log = LoggerFactory.getLogger(UserController.class);
 
-	@PostMapping("/api/v1.0/userrs")
+	@PostMapping("/api/v1.0/users")
 	@ResponseStatus(HttpStatus.CREATED)
-	public GenericrResponse createUser(@Valid @RequestBody Userr userr) {
-		userrService.add(userr);
-		return new GenericrResponse("user created - basarili");
+	public GenericResponse createUser(@Valid @RequestBody User user) {
+		userrService.add(user);
+		return new GenericResponse("user created - basarili");
 
 	}
 }

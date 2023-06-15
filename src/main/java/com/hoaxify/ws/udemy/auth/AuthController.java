@@ -13,28 +13,28 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hoaxify.ws.udemy.error.ApirError;
-import com.hoaxify.ws.udemy.user.Userr;
-import com.hoaxify.ws.udemy.user.UserrService;
+import com.hoaxify.ws.udemy.error.ApiError;
+import com.hoaxify.ws.udemy.user.User;
+import com.hoaxify.ws.udemy.user.UserService;
 
 @RestController
-public class AuthrController {
+public class AuthController {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	@Autowired
-	UserrService userrService;
-	ApirError apirError;
+	UserService userrService;
+	ApiError apirError;
 
-	final static Logger logger = LoggerFactory.getLogger(AuthrController.class);
+	final static Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-	@PostMapping("/api/v1.0/authr")
+	@PostMapping("/api/v1.0/auth")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> handleAuthentation(
 			@RequestHeader(name = "Authorization", required = false) String authorization) {
 		if (authorization == null) {
-			apirError = new ApirError(401, "Unauthorized - ", "/ap/v1.0/authr -");
+			apirError = new ApiError(401, "Unauthorized - ", "/ap/v1.0/authr -");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apirError);
 		}
 
@@ -45,17 +45,17 @@ public class AuthrController {
 		String password = authHeader.split(":")[1];
 		System.out.println(username + "ve " + password);
 
-		Userr userr = userrService.findByUsername(username);
+		User userr = userrService.findByUsername(username);
 
 		if (userr == null) {
-			apirError = new ApirError(401, "Unauthorized user", "/api/v1.0/authr");
+			apirError = new ApiError(401, "Unauthorized user", "/api/v1.0/authr");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apirError);
 		}
 
 		String hashedPassword = userr.getPassword();
 
 		if (!passwordEncoder.matches(password, hashedPassword)) {
-			apirError = new ApirError(401, "unAuthorizated", "/api/v1.0/authr");
+			apirError = new ApiError(401, "unAuthorizated", "/api/v1.0/authr");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apirError);
 		}
 

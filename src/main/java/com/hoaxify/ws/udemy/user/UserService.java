@@ -8,19 +8,19 @@ import lombok.Data;
 
 @Data
 @Service
-public class UserrService {
+public class UserService {
 
 	@Autowired
-	private UserrRepository userrRepository;
+	private UserRepository userRepository;
 
-	public void add(Userr userr) {
+	public void add(User user) {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		userr.setPassword(bCryptPasswordEncoder.encode(userr.getPassword()));
-		userrRepository.save(userr);
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		userRepository.save(user);
 	}
 
-	public Userr findByUsername(String username) {
-		return userrRepository.findByUsername(username);
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 //	void update(UpdateBrandRequest updateBrandRequest);
 //	void deleteById(int id);

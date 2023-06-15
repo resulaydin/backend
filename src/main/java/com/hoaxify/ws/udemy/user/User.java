@@ -1,4 +1,4 @@
-package com.hoaxify.ws.entities;
+package com.hoaxify.ws.udemy.user;
 
 
 import jakarta.persistence.Column;
@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "users")
+@Table(name = "userrs")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,12 +21,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
+	
 	@Column(name = "name")
+	@UniqueUsername(message = "{hoaxify.message.constraints.UNIQUE.message}")
 	private String username;
+	
 	@Column(name = "displayName")
 	private String displayName;
-//	@Column(name = "email")
-//	private String email;
+	
 	@Column(name = "password")
 	private String password;
 	

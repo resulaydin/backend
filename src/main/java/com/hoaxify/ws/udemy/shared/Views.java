@@ -1,6 +1,6 @@
 package com.hoaxify.ws.udemy.shared;
 
-public interface Viewsr {
+public interface Views {
 	
 	class Base{}
 
