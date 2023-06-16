@@ -1,7 +1,7 @@
 package com.hoaxify.ws.udemy.error;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -15,7 +15,7 @@ public class ApiError {
 	String message;
 	String path;
 	Long timestamp= new Date().getTime();
-	HashMap<String,String> validationErrors;
+	Map<String,String> validationErrors;
 	
 	public ApiError(int status,String message,String path) {
 		this.status = status;

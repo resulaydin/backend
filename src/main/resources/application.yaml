@@ -7,9 +7,31 @@
 #  jpa:
 #    hibernate:
 #      ddl-auto: update
+#//
 
 
 
 spring:
   datasource:
        generate-unique-name: false
+       
+Spring:
+   jpa:
+      properties:
+         jakarta: 
+            persistence:
+               validation:
+                  mode: none
+    
+# Aşağıdaki şekillerde loglevellerini belirlelyip istediğimiz seviyede log tutup hata vb. kontrolünü yapabiliriz.              
+#logging: 
+#   level:
+#      org.springframework: DEBUG
+#      
+#logging:
+#  level:
+#    com.example.packageName: INFO  # Belirli bir paketin log seviyesini INFO olarak ayarlayın
+#    another.packageName: WARN     # Başka bir paketin log seviyesini WARN olarak ayarlayın
+
+
+   
