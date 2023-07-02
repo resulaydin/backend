@@ -33,7 +33,7 @@ public class AuthController {
 		authHeader = new String(Base64.getDecoder().decode(authHeader));
 		String username = authHeader.split(":")[0];
 		String password = authHeader.split(":")[1];
-		System.out.println(username + "ve " + password);
+		System.out.println(username + " ve " + password);
 
 		User user = userrService.findByUsername(username);
 
