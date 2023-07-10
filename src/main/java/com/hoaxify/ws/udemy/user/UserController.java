@@ -38,7 +38,7 @@ public class UserController {
 	@GetMapping("/api/v1.0/users")
 	@ResponseStatus(HttpStatus.OK)
 	@JsonView(Views.Base.class)
-	public Page<User> getAll(Pageable page) {
+	public Page<UserProjection> getAll(Pageable page) {
 		return userService.getAll(page);
 	}
 

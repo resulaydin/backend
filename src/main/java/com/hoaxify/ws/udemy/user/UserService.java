@@ -30,8 +30,11 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 
-	public Page<User> getAll(Pageable page) {
-		return userRepository.findAll(page);
+//	public Page<User> getAll(Pageable page) {
+//		return userRepository.findAll(page);
+//	}
+	public Page<UserProjection> getAll(Pageable page) {
+		return userRepository.getAllUsersProjection(page);
 	}
 
 //	void update(UpdateBrandRequest updateBrandRequest);

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 
-@JsonComponent
+//@JsonComponent // Bu yazılmazsa hernagi bir önemi olmamaktadır.
 public class PageSerializer extends JsonSerializer<Page<?>> {
 
 	@Override
