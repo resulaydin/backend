@@ -18,19 +18,22 @@ public class WsApplication {
 		SpringApplication.run(WsApplication.class, args);
 	}
 
-    @Bean
-    CommandLineRunner createInitialUsers(UserService userService) {
-      return new CommandLineRunner() {
-        @Override
-        public void run(String... args) throws Exception {
-          User user = new User();
-          user.setUsername("user1");
-          user.setDisplayName("display1");
-          user.setPassword("P1234");
-          userService.add(user);
-        }
-      };
-    }
+	@Bean
+	CommandLineRunner createInitialUsers(UserService userService) {
+		return new CommandLineRunner() {
+			@Override
+			public void run(String... args) throws Exception {
+				for (int i = 0; i < 10; i++) {
+					User user = new User();
+					user.setUsername("user"+(i+1));
+					user.setDisplayName("display"+(i+1));
+					user.setPassword("P1234");
+					userService.add(user);
+				}
+
+			}
+		};
+	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoders() {

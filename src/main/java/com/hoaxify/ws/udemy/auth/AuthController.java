@@ -28,8 +28,7 @@ public class AuthController {
 	@JsonView(Views.Base.class)
 
 	public ResponseEntity<?> handleAuthentation(@CurrentUser User user) {	
-		User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println(user1);
+
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 }

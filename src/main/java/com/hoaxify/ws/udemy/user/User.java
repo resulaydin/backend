@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.hoaxify.ws.udemy.shared.Views;
 
@@ -27,14 +28,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class User implements UserDetails {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@JsonIgnore
 	private long id;
 
 	@Column(name = "name")
@@ -45,41 +45,47 @@ public class User implements UserDetails {
 
 	@NotNull
 	@Column(name = "displayName")
+	@JsonView(Views.Base.class)
 	private String displayName;
 
 	@Column(name = "password")
 	@NotNull
+	@JsonIgnore
 	@Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$",message = "{hoaxify.password.constraints.PATTERN.message}")
-	@JsonView(Views.Base.class)
 	private String password;
 
 	@JsonView(Views.Base.class)
 	private String image;
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return AuthorityUtils.createAuthorityList("Role_user ");
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
