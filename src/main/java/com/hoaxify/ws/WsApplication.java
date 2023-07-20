@@ -23,7 +23,7 @@ public class WsApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 35; i++) {
 					User user = new User();
 					user.setUsername("user"+(i+1));
 					user.setDisplayName("display"+(i+1));
