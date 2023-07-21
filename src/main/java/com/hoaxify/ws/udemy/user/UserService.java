@@ -1,12 +1,14 @@
 package com.hoaxify.ws.udemy.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hoaxify.ws.udemy.error.NotFoundException;
+import com.hoaxify.ws.udemy.file.FileService;
 import com.hoaxify.ws.udemy.user.vm.UserUpdateVM;
 
 import lombok.Data;
@@ -15,10 +17,17 @@ import lombok.Data;
 @Service
 public class UserService {
 
-	@Autowired
 	private UserRepository userRepository;
-	@Autowired
 	private PasswordEncoder passwordEncoder;
+	private FileService fileService;
+	
+	public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder, FileService fileService) {
+		this.userRepository=userRepository;
+		this.passwordEncoder=passwordEncoder;
+		this.fileService= fileService;
+	}
+	
+	
 
 	public User add(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -56,10 +65,18 @@ public class UserService {
 		User userInDB = getByUsername(username);
 		userInDB.setDisplayName(userUpdateVM.getDisplayName());
 		if(userUpdateVM.getImage() != null) {
-			userInDB.setImage(userUpdateVM.getImage());
+//			userInDB.setImage(userUpdateVM.getImage());
+			try {
+				String fileName = fileService.writeBase64EncodedStringToFile(userUpdateVM.getImage());
+				userInDB.setImage(fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return userRepository.save(userInDB);
 	}
+
+
 
 //	void update(UpdateBrandRequest updateBrandRequest);
 //	void deleteById(int id);

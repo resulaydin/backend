@@ -1,32 +1,78 @@
+spring:
+  profiles:
+    active: 
+       - dev
+
+  jpa:
+    properties:
+      jakarta.persistence.validation.mode: none
+
+data:
+  web:
+    pageable:
+      default-page-size: 3
+      max-page-size: 8
+
+hoaxify:
+  uploaded-path: picture-storage
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+
+hoaxify:
+  uploaded-path: production-storage
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+hoaxify:
+  uploaded-path: dev-storage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#       
+#spring:
+#   jpa:
+#      properties:
+#         jakarta: 
+#            persistence:
+#               validation:
+#                  mode: none
+#data:
+#   web:
+#      pageable:
+#          default-page-size: 3
+#          max-page-size: 8
+#                            
+               
 #spring:
 #  datasource:
-#       generate-unique-name: false  Bunu her seferinde database adı oluşturmamak için kullandık.
+#    //generate-unique-name: false  Bunu her seferinde database adı oluşturmamak için kullandık.
 #    url: jdbc:h2:file:./db/devdb
 #    username: sa
 #    password:
 #  jpa:
 #    hibernate:
 #      ddl-auto: update
-#//
 
-
-
-spring:
-  datasource:
-       generate-unique-name: false
-       
-Spring:
-   jpa:
-      properties:
-         jakarta: 
-            persistence:
-               validation:
-                  mode: none
-   data:
-      web:
-         pageable:
-               default-page-size: 3
-               max-page-size: 8
 #   jackson:
 #      mapper:
 #         DEFAULT_VIEW_INCLUSION: true
@@ -43,6 +89,5 @@ Spring:
 #  level:
 #    com.example.packageName: INFO  # Belirli bir paketin log seviyesini INFO olarak ayarlayın
 #    another.packageName: WARN     # Başka bir paketin log seviyesini WARN olarak ayarlayın
-
-
-   
+#
+#
