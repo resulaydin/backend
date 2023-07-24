@@ -1,6 +1,6 @@
 package com.hoaxify.ws.udemy.user.vm;
 
-import com.hoaxify.ws.udemy.shared.ProfileImage;
+import com.hoaxify.ws.udemy.shared.FileType;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +16,10 @@ public class UserUpdateVM {
 	@Size(min = 3, max = 255, message = "{hoaxify.diplayName.constraints.SIZE.message}")
 	private String displayName;
 
-	@ProfileImage
+	@FileType(types = {"jpeg","png"})
 	private String image;
+	
+	
+//	@Profile
+//	private String image;
 }

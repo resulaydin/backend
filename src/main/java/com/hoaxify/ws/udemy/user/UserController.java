@@ -34,6 +34,7 @@ public class UserController {
 	@PostMapping("/users")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User createUser(@Valid @RequestBody User user) {
+		System.out.println(user);
 		return userService.add(user);
 
 	}
@@ -41,6 +42,7 @@ public class UserController {
 	@GetMapping("/users")
 	@ResponseStatus(HttpStatus.OK)
 	public Page<UserVM> getAll(Pageable page, @CurrentUser User user) {
+		System.out.println(user);
 		return userService.getAll(page, user).map(UserVM::new);
 	}
 

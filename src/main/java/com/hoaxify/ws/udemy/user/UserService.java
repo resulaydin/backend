@@ -2,6 +2,8 @@ package com.hoaxify.ws.udemy.user;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +22,8 @@ public class UserService {
 	private UserRepository userRepository;
 	private PasswordEncoder passwordEncoder;
 	private FileService fileService;
+	
+	final static Logger log = LoggerFactory.getLogger(FileService.class);
 	
 	public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder, FileService fileService) {
 		this.userRepository=userRepository;
@@ -55,7 +59,10 @@ public class UserService {
 	}
 
 	public Page<User> getAll(Pageable page, User user) {
+		System.out.println("");
 		if (user != null) {
+			boolean isExist = userRepository.findByUsernameNot(user.getUsername(), page).stream().anyMatch(u->"user1".equals(u.getUsername()));
+			log.info(isExist+"");
 			return userRepository.findByUsernameNot(user.getUsername(), page);
 		}
 		return userRepository.findAll(page);
