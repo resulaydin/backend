@@ -29,6 +29,7 @@ public class SecurityConfiguration {
 		http.csrf(crsf -> crsf.disable());
 
 		http.httpBasic((httpbasic) -> httpbasic.authenticationEntryPoint(new AuthEntryPoint()));
+		http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())); 
 
 		http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
 				.requestMatchers(HttpMethod.POST, "/api/v1.0/auth").authenticated()

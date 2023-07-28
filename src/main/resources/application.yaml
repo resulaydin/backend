@@ -6,6 +6,11 @@ spring:
   jpa:
     properties:
       jakarta.persistence.validation.mode: none
+    hibernate:
+      ddl-auto: update
+      
+  datasource: 
+    generate-unique-name: false
 
 data:
   web:

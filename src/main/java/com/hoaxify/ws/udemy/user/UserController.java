@@ -36,14 +36,13 @@ public class UserController {
 	public User createUser(@Valid @RequestBody User user) {
 		System.out.println(user);
 		return userService.add(user);
-
 	}
 
 	@GetMapping("/users")
 	@ResponseStatus(HttpStatus.OK)
 	public Page<UserVM> getAll(Pageable page, @CurrentUser User user) {
 		System.out.println(user);
-		return userService.getAll(page, user).map(UserVM::new);
+		return userService.getAll(page, user).map(UserVM::new); 
 	}
 
 	@GetMapping("/users/{username}")
