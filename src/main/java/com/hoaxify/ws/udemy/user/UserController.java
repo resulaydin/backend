@@ -40,7 +40,7 @@ public class UserController {
 
 	@GetMapping("/users")
 	@ResponseStatus(HttpStatus.OK)
-	public Page<UserVM> getAll(Pageable page, @CurrentUser User user) {
+	public Page<UserVM> getUsers(Pageable page, @CurrentUser User user) {
 		System.out.println(user);
 		return userService.getAll(page, user).map(UserVM::new); 
 	}

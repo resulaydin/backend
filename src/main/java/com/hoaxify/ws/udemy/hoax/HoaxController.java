@@ -50,8 +50,8 @@ public class HoaxController {
 	
 	@GetMapping("hoaxes/engo") 
 	@ResponseStatus(HttpStatus.OK)
-	public Page<GetAllHoaxesResponse> getAll( @PageableDefault(sort = "id",direction = Direction.DESC) Pageable page){
-		Page<Hoax> hoaxes = hoaxService.getAll(page);
+	public Page<GetAllHoaxesResponse> getAllEngo( @PageableDefault(sort = "id",direction = Direction.DESC) Pageable page){
+		Page<Hoax> hoaxes = hoaxService.getHoaxes(page);
 	    List<GetAllHoaxesResponse> getAllHoaxesResponses = hoaxes.stream()
 	            .map(hoax -> modelMapperService.forResponse().map(hoax, GetAllHoaxesResponse.class))
 	            .collect(Collectors.toList());
@@ -59,15 +59,24 @@ public class HoaxController {
 	}
 	
 	@GetMapping("hoaxes")
-	@ResponseStatus(HttpStatus.OK)
-	public Page<HoaxVM> getAllStandart(@PageableDefault(sort="id",direction=Direction.DESC ) Pageable page){
-		return hoaxService.getAll(page).map(HoaxVM::new);
+	public Page<HoaxVM> getHoaxes(@PageableDefault(sort="id",direction=Direction.DESC ) Pageable page){
+		return hoaxService.getHoaxes(page).map(HoaxVM::new);
+	}
+	
+	@GetMapping("hoaxes/{id:[0-9]+}")
+	public Page<HoaxVM> getHoaxesRelative(@PathVariable long id, @PageableDefault(sort="id",direction=Direction.DESC ) Pageable page){
+		return hoaxService.getHoaxesRelative(id,page).map(HoaxVM::new);
 	}
 	
 	@GetMapping("users/{username}/hoaxes")
 	@ResponseStatus(HttpStatus.OK)
 	public Page<HoaxVM> getUsersHoaxes(@PathVariable String username, @PageableDefault(sort = "id", direction = Direction.DESC) Pageable page){
 		return hoaxService.getHoaxesOfUser(username,page).map(HoaxVM::new);
+	}
+	@GetMapping("users/{username}/hoaxes/{id:[0-9]+}")
+	@ResponseStatus(HttpStatus.OK)
+	public Page<HoaxVM> getUsersHoaxesRelative(@PathVariable long id ,@PathVariable String username, @PageableDefault(sort = "id", direction = Direction.DESC) Pageable page){
+		return hoaxService.getHoaxesOfUserRelative(id,username,page).map(HoaxVM::new);
 	}
 
 }
