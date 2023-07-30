@@ -4,11 +4,8 @@ import java.util.Date;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Order;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
-import com.hoaxify.ws.udemy.hoax.vm.HoaxVM;
 import com.hoaxify.ws.udemy.user.User;
 import com.hoaxify.ws.udemy.user.UserService;
 
@@ -60,5 +57,22 @@ public class HoaxService {
 		return hoaxRepository.findByIdLessThanAndUser(id, inDB, page);
 	}
 
+	public long getNewHoaxesCount(long id) {
+		return hoaxRepository.countByIdGreaterThan(id);
+	}
+
+	public Page<Hoax> getNewHoaxes(long id, Pageable page) {
+		return hoaxRepository.findByIdGreaterThan(id,page);
+	}
+
+	public long getNewHoaxesOfUserRelative(long id,String username) {
+		User inDB = userService.getByUsername(username);
+		return hoaxRepository.countByIdGreaterThanAndUser(id, inDB);
+	}
+
+	public Page<Hoax> getNewHoaxesOfUser(long id, String username, Pageable page) {
+		User inDB = userService.getByUsername(username);
+		return hoaxRepository.findByIdGreaterThanAndUser(id,inDB,page);
+	}
 
 }

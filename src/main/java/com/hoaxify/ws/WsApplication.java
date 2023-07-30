@@ -30,13 +30,13 @@ public class WsApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				for (int i = 0; i < 12; i++) {
+				for (int i = 0; i < 8; i++) {
 					User user = new User();
 					user.setUsername("user" + (i + 1));
 					user.setDisplayName("display" + (i + 1));
 					user.setPassword("P1234");
 					userService.add(user);
-					for (int j = 0; j < 2; j++) {
+					for (int j = 0; j < 5; j++) {
 						Hoax hoax = new Hoax();
 						hoax.setContent("hoax ("+(j+1)+") \n");
 						hoax.setTimestamp(new Date());
